@@ -1,23 +1,35 @@
 {% extends 'base.html' %}
 
-{% block title %}Create{% endblock %}
+{% block title %}Crear{% endblock %}
 
 {% block content %}
 <h1>Crear un nuevo Post</h1>
+
+<!-- Mostrar mensajes flash -->
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        <ul class="flashes">
+            {% for category, message in messages %}
+                <li class="alert alert-{{ category }}">{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+{% endwith %}
+
 <form method="post">
     <div class="form-group">
-        <label for="title">Title</label>
+        <label for="title">Título</label>
         <input type="text" id="title" name="title"
-               placeholder="Post title" class="form-control"
+               placeholder="Título del post" class="form-control"
                value="{{ request.form.get('title', '') }}">
     </div>
     <div class="form-group">
-        <label for="content">Content</label>
+        <label for="content">Contenido</label>
         <textarea id="content" name="content"
-                  placeholder="Post content" class="form-control">{{ request.form.get('content', '') }}</textarea>
+                  placeholder="Contenido del post" class="form-control">{{ request.form.get('content', '') }}</textarea>
     </div>
     <div class="form-group">
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-primary">Enviar</button>
     </div>
 </form>
 {% endblock %}
