@@ -15,7 +15,7 @@ def home():
 @app.route('/post', methods=['GET'])
 def get_all_post():
     conn = get_db_connection()
-    posts = conn.execute('SELECT * FROM posts').fetchone()
+    posts = conn.execute('SELECT * FROM posts').fetchall()
     conn.close()
     return render_template('post/posts.html', posts=posts)
 
@@ -70,5 +70,5 @@ def delete_one_post(post_id):
     return redirect(url_for('get_all_post'))
 
 if __name__ == '__main__':
-    app.run(debug=True, port=80, host=)
+    app.run(debug=True, port=80, host='0.0.0.0')
 ########################################################################## END BLOQUE 2
